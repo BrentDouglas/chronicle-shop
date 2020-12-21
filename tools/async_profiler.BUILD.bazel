@@ -1,0 +1,29 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_jvm_external//private/rules:jvm_import.bzl", "jvm_import")
+
+filegroup(
+    name = "scripts",
+    srcs = [
+        "LICENCE",
+        "profiler.sh",
+        "build/jattach",
+    ],
+)
+
+jvm_import(
+    name = "async_profiler",
+    jars = ["build/async-profiler.jar"],
+)
+
+jvm_import(
+    name = "converter",
+    jars = ["build/converter.jar"],
+)
+
+filegroup(
+    name = "native_lib",
+    srcs = [
+        "build/libasyncProfiler.so",
+    ],
+)

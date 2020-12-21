@@ -1,0 +1,22 @@
+# Bazel
+bazel-*
+.userbazelrc
+
+# Lcov
+.srv
+
+# VIM
+*.swp
+*~
+
+# IDEA
+.ijwb
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Eclipse
+.metadata
+.project
+.settings

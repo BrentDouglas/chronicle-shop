@@ -1,0 +1,66 @@
+load("@io_machinecode_tools//tools:coverage.bzl", "coverage_html")
+load("//:versions.bzl", "project_version")
+
+package(default_visibility = ["//visibility:public"])
+
+filegroup(
+    name = "coverage_data",
+    srcs = glob([
+        "bazel-out/**/coverage.dat",
+    ]),
+)
+
+coverage_html(
+    name = "coverage",
+    srcs = [
+        "//src/main/java/io/machinecode/shop:srcs",
+        "//src/main/java/io/machinecode/shop/cart:srcs",
+        "//src/main/java/io/machinecode/shop/cart/api:srcs",
+        "//src/main/java/io/machinecode/shop/cart/command:srcs",
+        "//src/main/java/io/machinecode/shop/cart/domain:srcs",
+        "//src/main/java/io/machinecode/shop/cart/event:srcs",
+        "//src/main/java/io/machinecode/shop/product:srcs",
+        "//src/main/java/io/machinecode/shop/product/api:srcs",
+        "//src/main/java/io/machinecode/shop/product/command:srcs",
+        "//src/main/java/io/machinecode/shop/product/domain:srcs",
+        "//src/main/java/io/machinecode/shop/product/event:srcs",
+        "//src/main/java/io/machinecode/shop/product/model:srcs",
+    ],
+    data = [
+        "//:coverage_data",
+    ],
+    tags = ["manual"],
+)
+
+java_binary(
+    name = "shop",
+    jvm_flags = [
+        "-XX:+AlwaysPreTouch",
+        "-Xms1G",
+        "-Xmx1G",
+    ],
+    main_class = "io.machinecode.shop.Main",
+    resource_jars = [
+        "//src/main/java/io/machinecode/shop",
+        "//src/main/java/io/machinecode/shop/product",
+        "//src/main/java/io/machinecode/shop/product/api",
+        "//src/main/java/io/machinecode/shop/product/command",
+        "//src/main/java/io/machinecode/shop/product/domain",
+        "//src/main/java/io/machinecode/shop/product/event",
+        "//src/main/java/io/machinecode/shop/product/model",
+        "//src/main/java/io/machinecode/shop/cart",
+        "//src/main/java/io/machinecode/shop/cart/command",
+        "//src/main/java/io/machinecode/shop/cart/event",
+        "//src/main/java/io/machinecode/shop/cart/domain",
+        "//src/main/java/io/machinecode/shop/cart/api",
+    ],
+    runtime_deps = [
+        "@maven//:gnu_getopt_java_getopt",
+        "@maven//:net_openhft_chronicle_bytes",
+        "@maven//:net_openhft_chronicle_core",
+        "@maven//:net_openhft_chronicle_map",
+        "@maven//:net_openhft_chronicle_queue",
+        "@maven//:net_openhft_chronicle_threads",
+        "@maven//:net_openhft_chronicle_wire",
+    ],
+)

@@ -1,0 +1,11 @@
+package(default_visibility = ["//visibility:public"])
+
+filegroup(
+    name = "config",
+    srcs = ["checkstyle.xml"],
+)
+
+filegroup(
+    name = "header",
+    srcs = ["proprietary-java.txt"],
+)

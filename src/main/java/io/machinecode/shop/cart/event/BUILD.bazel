@@ -1,0 +1,11 @@
+load("//tools/java:java_package.bzl", "java_package")
+
+package(default_visibility = ["//visibility:public"])
+
+java_package(
+    name = "event",
+    deps = [
+        "//src/main/java/io/machinecode/shop/product/model",
+        "@maven//:net_openhft_chronicle_wire",
+    ],
+)

@@ -1,0 +1,19 @@
+load("//tools/java:java_test_suite.bzl", "java_test_suite")
+
+package(default_visibility = ["//visibility:public"])
+
+java_test_suite(
+    name = "shop",
+    size = "small",
+    deps = [
+        "//src/main/java/io/machinecode/shop",
+        "//src/main/java/io/machinecode/shop/product/command",
+        "//src/main/java/io/machinecode/shop/product/domain",
+        "//src/main/java/io/machinecode/shop/product/event",
+        "@maven//:junit_junit",
+        "@maven//:org_mockito_mockito_all",
+        "@maven//:net_openhft_chronicle_bytes",
+        "@maven//:net_openhft_chronicle_core",
+        "@maven//:net_openhft_chronicle_threads",
+    ],
+)

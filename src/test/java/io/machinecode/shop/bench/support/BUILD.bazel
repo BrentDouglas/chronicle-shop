@@ -1,0 +1,18 @@
+load("//tools/java:java_package.bzl", "java_package")
+
+package(default_visibility = ["//visibility:public"])
+
+java_package(
+    name = "support",
+    deps = [
+        "//src/main/java/io/machinecode/shop",
+        "//src/main/java/io/machinecode/shop/cart/api",
+        "//src/main/java/io/machinecode/shop/cart/command",
+        "//src/main/java/io/machinecode/shop/product/api",
+        "//src/main/java/io/machinecode/shop/product/command",
+        "//src/main/java/io/machinecode/shop/product/model",
+        "@io_machinecode_tools//tools/java:jmh",
+        "@jmh_m2//:org_openjdk_jmh_jmh_core",
+        "@maven//:net_openhft_chronicle_threads",
+    ],
+)

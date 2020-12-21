@@ -1,0 +1,57 @@
+load("//tools/java:java_package.bzl", "java_package")
+load("//tools/java:java_bench_suite.bzl", "java_bench_suite")
+
+package(default_visibility = ["//visibility:public"])
+
+java_bench_suite(
+    name = "bench",
+    srcs = glob(
+        include = ["*.java"],
+        exclude = ["support/BaseBench.java"],
+    ),
+    data = [
+        "@async_profiler//:native_lib",
+    ],
+    jvm_flags = [
+        "'-Djava.library.path=external/async_profiler/build'",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseEpsilonGC",
+        "-XX:+AlwaysPreTouch",
+    ],
+    tags = [
+        "bench",
+        "manual",
+    ],
+    runtime_deps = [
+        "//src/main/java/io/machinecode/shop/cart",
+        "//src/main/java/io/machinecode/shop/cart/domain",
+        "//src/main/java/io/machinecode/shop/cart/event",
+        "//src/main/java/io/machinecode/shop/product",
+        "//src/main/java/io/machinecode/shop/product/domain",
+        "//src/main/java/io/machinecode/shop/product/event",
+        "@async_profiler",
+        "@async_profiler//:converter",
+        "@jmh_m2//:net_sf_jopt_simple_jopt_simple",
+        "@jmh_m2//:org_apache_commons_commons_math3",
+        "@maven//:net_openhft_chronicle_analytics",
+        "@maven//:net_openhft_chronicle_bytes",
+        "@maven//:net_openhft_chronicle_core",
+        "@maven//:net_openhft_chronicle_map",
+        "@maven//:net_openhft_chronicle_queue",
+        "@maven//:net_openhft_chronicle_threads",
+        "@maven//:net_openhft_chronicle_values",
+        "@maven//:net_openhft_chronicle_wire",
+    ],
+    deps = [
+        "//src/main/java/io/machinecode/shop",
+        "//src/main/java/io/machinecode/shop/cart/api",
+        "//src/main/java/io/machinecode/shop/cart/command",
+        "//src/main/java/io/machinecode/shop/product/api",
+        "//src/main/java/io/machinecode/shop/product/command",
+        "//src/main/java/io/machinecode/shop/product/model",
+        "//src/test/java/io/machinecode/shop/bench/support",
+        "@io_machinecode_tools//tools/java:jmh",
+        "@jmh_m2//:org_openjdk_jmh_jmh_core",
+        "@maven//:junit_junit",
+    ],
+)

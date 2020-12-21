@@ -1,0 +1,10 @@
+load("//tools/java:java_package.bzl", "java_package")
+
+package(default_visibility = ["//visibility:public"])
+
+java_package(
+    name = "model",
+    deps = [
+        "@maven//:net_openhft_chronicle_wire",
+    ],
+)

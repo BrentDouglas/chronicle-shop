@@ -1,0 +1,11 @@
+load("//tools/java:java_package.bzl", "java_package")
+
+package(default_visibility = ["//visibility:public"])
+
+java_package(
+    name = "api",
+    deps = [
+        "//src/main/java/io/machinecode/shop/cart/command",
+        "//src/main/java/io/machinecode/shop/cart/event",
+    ],
+)
